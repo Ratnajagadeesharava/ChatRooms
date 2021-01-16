@@ -75,3 +75,5 @@
 /home/jagadeesh/Documents/ChatApp/obj/Debug/net5.0/Razor/Views/Account/Register.cshtml.g.cs
 /home/jagadeesh/Documents/ChatApp/bin/Debug/net5.0/Newtonsoft.Json.dll
 /home/jagadeesh/Documents/ChatApp/bin/Debug/net5.0/System.Net.WebSockets.WebSocketProtocol.dll
+/home/jagadeesh/Documents/ChatApp/bin/Debug/net5.0/package-lock.json
+/home/jagadeesh/Documents/ChatApp/bin/Debug/net5.0/package.json

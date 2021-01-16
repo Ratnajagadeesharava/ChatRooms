@@ -58,3 +58,35 @@
 
 
  *@
+@section scripts{
+    @* signalrjs file from @aspnetcore/signalr (installed using npm and moved to wwwroot) *@
+    <script src="~/js/signalr.min.js"></script>
+    @* axios js *@
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        @* Creating a connection using Connection Builder (BuilderDesign Technique from software development) *@
+        var connection  = new signalR.HubConnectionBuilder()
+                                     .withUrl("/chatHub")
+                                     .build();
+        var _connectionId ='';
+        @* here we call the method that is declared in ChatRoom file *@
+        connection.on("RecieveMethodFromServer",function(data){
+            console.log(data);
+        });
+        connection.start().then(function(){
+                connection.invoke("getConnectionId").then(function(connectionId){
+                    _connectionId = connectionId;
+                })
+        }).catch(function(err){
+            console.log(err)
+        });
+        var joinRoom = function(){
+            var url ='/Chat/JoinRoom/'+_connectionId+'/@Model.RoomName';
+            axios.post(url,null).then(res=>{
+                console.log("Room Joined",res);
+            }).catch(err=>{
+                console.log("errr:"+err);
+            })
+        }   
+    </script>
+}
