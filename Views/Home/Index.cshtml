@@ -1,0 +1,47 @@
+@{ViewData["Title"]="Chating App";}
+
+
+<div class="container-fluid">
+    <div class="d-flex flex-column justify-content-end message-container">
+        <div class="chat-container">
+            @for(int i=0;i<100;i++){
+            <div class="message-box d-flex flex-column justify-content-end">
+                    <div class="mymessages d-flex flex-row justify-content-end">
+                        <div class="mymessage">
+                            <div class="messageheader text-start">
+                                you
+                            </div>
+                            <div class="message-content ">
+                                hello yourname @i
+                            </div>
+                            <div class="message-footer text-end">
+                            12:00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="othermessages d-flex flex-row justify-content-start">
+                        <div class="othermessage">
+                            <div class="messageheader text-start">
+                                others
+                            </div>
+                            <div class="message-content ">
+                                hello jagadeesh
+                            </div>
+                            <div class="message-footer text-end">
+                            12:01
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            }
+            @* <a href="https://prod.liveshare.vsengsaas.visualstudio.com/join?2289600488C775E3DB930FDF923B14AA126C">link for</a> *@
+        </div>
+    <div class="input-message-group">
+        <div class="d-flex flex-row justify-content-start">
+                <input class="form-control" type="text" name="" id="">
+                <input type="button" class="btnsubmit" value="Send" class="btn btn-info">
+        </div>
+    </div>
+    </div>
+</div>
+

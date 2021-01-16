@@ -1,0 +1,12 @@
+@model IEnumerable<Chat>
+
+    @foreach (var chat in Model)
+    {
+        @if(chat.RoomName.Length!=0){
+      
+        <a class="btn btn-primary btn-menu" asp-controller="Home" asp-action="ChatRoom" asp-route-id="@chat.Id">
+        @chat.RoomName
+        </a>
+        }
+    }
+   

@@ -1,0 +1,17 @@
+@{
+    ViewData["title"] = "Login";
+    Layout = "_MyLayout";
+}
+<div class="container-fluid d-flex flex-column justify-content-center login-background ">
+    <div class="chat-container-row d-flex  flex-row justify-content-center">
+           <div class="login-container">
+               <form asp-controller="Account" asp-action="Login" method="post">
+                   <input type="text" name="userName" id="" class="form-control">
+                   <input type="password" name="password" id="" class="form-control">
+                   <input type="submit" class="btn btn-primary" value="Login">
+                   <a class="btn btn-info" asp-controller="Account" asp-action="Register">Register</a>
+               </form>
+           </div>
+    </div>
+</div>
+warning

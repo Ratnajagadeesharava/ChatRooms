@@ -1,0 +1,82 @@
+h1{
+    color: green;
+}
+.sidenavbar{
+    background-color: rgb(27, 0, 0);
+    min-height: 100vh;
+    width: 100px;
+    align-items: center;
+   
+}
+.main-navbar{
+    background-color: rgb(27, 3, 15);
+    
+}
+.btn-menu   {
+    word-wrap:break-word;
+    font-size: 12px;
+    width:50px;
+   min-height:50px;
+    font-weight:bold;
+    overflow:hidden;
+    padding:0;
+    padding-top:12px;
+    margin:12px;
+}
+
+.mymessage{
+     line-height:18px;
+    padding:1px;
+    margin-right:12px;
+    min-height:24px;
+    font-size:22px;
+    font-weight: bold;
+    background-color: #2ecc71;
+    border-radius: 12px 12px 0 12px;
+    color:white;
+}
+.othermessage{
+    margin-bottom: 16px;
+      margin-left:18px;
+    line-height:22px;
+    padding:1px;
+    
+    min-height:24px;
+    font-size:22px;
+    min-width:200px;
+    font-weight: bold;
+    background-color: #3498db;
+    border-radius: 18px 18px 18px 0;
+    border-bottom-left-radius: 0px;
+    color:white;
+}
+.messageheader{
+    font-size:12px;
+    background-color:#7f8c8d;
+    
+    color:black;
+    border-radius:18px 18px 0 0;
+    padding-left:8px;
+    width:inherit;
+    padding:-2px;
+}
+.message-footer{
+    font-size: 12px;
+}
+.message-container{
+   margin:0; 
+}
+.chat-container{
+    max-height:75vh;
+    min-height: 75vh  ;
+    overflow: auto;
+    margin:0;
+}
+
+.btnsubmit{
+    height:36px;
+    width:120px;
+}
+.input-message-group{
+    margin-top:40px;
+}

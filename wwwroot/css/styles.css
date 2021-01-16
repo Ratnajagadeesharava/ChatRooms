@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+body{
+    background-image: url("https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png");
+    background-size:cover;
+}
+.login-background{
+    height: 100vh;
+}
+
+.form-control{
+    margin-bottom: 12px;
+    border:2px solid turquoise;
+    font-weight: bold;
+    color: black;
+}
+.btn-info{
+    font-weight:bold;
+    color:whitesmoke;
+}
+  body, .login-container::before {
+    background-image: url("https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105_960_720.png");
+    background-size: cover;
+    height: 100%;
+  }
+  
+  .login-container {
+    
+    height: 100%;
+    padding: 24px;
+    padding-top: 44px;
+    
+    background: rgba(255, 255, 255, 0.15) border-box;
+    
+    border-radius: 1.3em;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+
+  }
+  
+  .login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /*margin: -30px;*/
+    z-index: -1;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+  }
+  
+
+  
