@@ -2067,6 +2067,7 @@ var HubConnection = /** @class */ (function () {
      * @param {any[]} args The arguments used to invoke the server method.
      * @returns {Promise<T>} A Promise that resolves with the result of the server method (if any), or rejects with an error.
      */
+    
     HubConnection.prototype.invoke = function (methodName) {
         var _this = this;
         var args = [];

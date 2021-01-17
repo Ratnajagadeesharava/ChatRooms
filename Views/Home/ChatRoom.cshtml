@@ -28,10 +28,11 @@
         </div>
     <div class="input-message-group">
         
-        <form asp-controller="Home" asp-action="SendMessage" method="POST">
+        <form onsubmit="sendMessage(event)" asp-controller="Home" asp-action="SendMessage" method="POST">
             <div class="d-flex flex-row justify-content-start">
-                <input type="hidden" name="ChatId" value="@Model.Id">
-                <input class="form-control" type="text" name="ChatMessage" id="">
+                <input type="hidden" name="chatId" value="@Model.Id">
+                <input type="hidden" name="roomName" value="@Model.RoomName">
+                <input class="form-control" id="ChatMessage" type="text" name="message" id="">
                 <input type="submit" class="btnsubmit" value="Send" class="btn btn-info">
             </div>
         </form>
@@ -60,33 +61,69 @@
  *@
 @section scripts{
     @* signalrjs file from @aspnetcore/signalr (installed using npm and moved to wwwroot) *@
-    <script src="~/js/signalr.min.js"></script>
+    <script src="~/js/signalr.js"></script>
     @* axios js *@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        @* Creating a connection using Connection Builder (BuilderDesign Technique from software development) *@
-        var connection  = new signalR.HubConnectionBuilder()
+        console.log("hello");
+        @* Creating a connection using Connection Builder (BuilderDesignPattern Technique from software development) *@
+        let connection  = new signalR.HubConnectionBuilder()
                                      .withUrl("/chatHub")
                                      .build();
-        var _connectionId ='';
+
+
+
         @* here we call the method that is declared in ChatRoom file *@
-        connection.on("RecieveMethodFromServer",function(data){
-            console.log(data);
+        connection.on('recieveMethodFromServer',function(message){
+            let data = JSON.stringify(message);
+            console.log("Data:"+data);
+            var header = document.createElement("div");
+            header.classList.add('messageheader text-start');
+            var messageContent = document.createElement("div");
+            messageContent.classList.add('message-content');
+            var footer = document.createElement("div");
+            footer.classList.add('message-footer');
         });
+        @* declaring a global variables for connectionId *@
+        let _connectionId ='';
+
+        @* Starting the Connection //Connection.Start() is a Promise*@
         connection.start().then(function(){
+            
                 connection.invoke("getConnectionId").then(function(connectionId){
                     _connectionId = connectionId;
-                })
-        }).catch(function(err){
+                }
+            )}
+        ).catch(function(err){
             console.log(err)
         });
-        var joinRoom = function(){
+        
+    @* SendMessage *@
+    let form = null;
+    let sendMessage = function(event){
+        @* it will prevent from submiting the form to Account Controller *@
+        event.preventDefault();
+        form = event.target;
+        var data = new FormData(form);
+        axios.post('/Chat/SendMessage',data)
+             .then(res=>{
+                 document.getElementById("ChatMessage").value="";
+                 console.log("MessageSent");
+             })
+             .catch(err=>{
+                 console.log("FailedToSend");
+             });
+    };
+    @* JoinRoom Method *@
+        let joinRoom = function(){
             var url ='/Chat/JoinRoom/'+_connectionId+'/@Model.RoomName';
+            @* Axios is an API which is used to send Requests using Promises*@
             axios.post(url,null).then(res=>{
                 console.log("Room Joined",res);
             }).catch(err=>{
-                console.log("errr:"+err);
+                console.log("error:"+err);
             })
-        }   
+        };   
+        @* joinRoom(); *@
     </script>
 }

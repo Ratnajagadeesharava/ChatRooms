@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using ChatApp.Database;
 using ChatApp.Models;
 using System;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Controllers
 {
@@ -35,21 +37,26 @@ namespace Controllers
             await _chatHub.Groups.RemoveFromGroupAsync(connectionId,roomName);
             return Ok();
         }
-        public async Task<IActionResult> SendMessage(string message,string chatId,string roomName)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> SendMessage(string message,int chatId,string roomName)
         {
+            Console.WriteLine(message+" "+chatId+" "+ roomName);
+             var chat = await _db.Chats.Include(x => x.Messages).FirstOrDefaultAsync(x=>x.Id==chatId);
             var MessageObj = new Message{
-                
                 Text    = message,
                 Name    =User.Identity.Name,
                 TimeStamp = DateTime.Now
             };
-            _db.Messages.Add(MessageObj);
+            chat.Messages.Add(MessageObj);
+            _db.Chats.Update(chat);
             await _db.SaveChangesAsync();
             await _chatHub.Clients
-                            .Group(roomName)
-                            .SendAsync("RecieveMethodFromServer",MessageObj);
+                            .All
+                            .SendAsync("recieveMethodFromServer",MessageObj);
+                            
                             //RecieveMethodFromServer is a method on client
-
+            //SendAsync can take methodName and Object(can be any type )of maximum 10 and can be null
+            // await _chatHub.Clients.All.SendAsync("MethodName",MessageObj);
             return Ok();
         }
     }
